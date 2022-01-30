@@ -1,0 +1,28 @@
+---
+apiVersion: gateway.solo.io/v1
+kind: VirtualService
+metadata:
+  name: default
+  namespace: gloo-system
+  ownerReferences: []
+status:
+  reportedBy: gateway
+  state: Accepted
+  subresourceStatuses:
+    '*v1.Proxy.gloo-system.gateway-proxy':
+      reportedBy: gloo
+      state: Accepted
+spec:
+  virtualHost:
+    domains:
+    - '*'
+    routes:
+    - matchers:
+      - exact: /all-pets
+      options:
+        prefixRewrite: /api/pets
+      routeAction:
+        single:
+          upstream:
+            name: default-petstore-8080
+            namespace: gloo-system          

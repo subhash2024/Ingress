@@ -1,0 +1,7 @@
+kubectl create ns nginx-ingress
+
+helm install nginx .\nginx-ingress -n nginx-ingress
+
+kubectl apply -f kubernetes-ingress/deployments/helm-chart/crds -n nginx-ingress 
+
+kubectl apply -f .\sample-app\

@@ -1,0 +1,8 @@
+kubectl create namespace istio-ingress
+kubectl create namespace istio-system
+kubectl label namespace istio-ingress istio-injection=enabled
+
+helm install istiod ./istiod -n istio-system
+helm install istio-ingress ./gateway -n istio-ingress
+
+kubectl apply -f sample-app\

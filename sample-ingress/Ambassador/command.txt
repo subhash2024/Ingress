@@ -1,0 +1,9 @@
+kubectl create namespace ambassador
+
+kubectl apply -f https://app.getambassador.io/yaml/edge-stack/2.1.2/aes-crds.yaml && kubectl wait --timeout=90s --for=condition=available deployment emissary-apiext -n emissary-system
+
+helm install edge-stack ./edge-stack --namespace ambassador && kubectl -n ambassador wait --for condition=available --timeout=90s deploy -lproduct=aes
+
+kubectl apply -f sample-app\
+
+acesss: {{ LB_ENDPOINT }}/backend/

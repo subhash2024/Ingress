@@ -1,0 +1,7 @@
+kubectl create namespace gloo-system
+
+helm install gloo ./gloo --namespace gloo-system
+
+kubectl apply -f ./sample-app
+
+acesss: {{ LB_ENDPOINT }}/all-pets
